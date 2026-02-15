@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+// Removed unused logo imports
 import './App.css'
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -10,12 +9,13 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 function App() {
-  const [count, setCount] = useState(0)
+  // Removed unused count state
 
   return (
-    <div className="bg-[#0a0a12] min-h-screen text-white">
+    // ADDED: overflow-x-hidden to prevent horizontal scroll
+    <div className="bg-[#0a0a12] min-h-screen text-white overflow-x-hidden w-full">
       <Navbar />
-      <main> {/* <--- Adds padding so content isn't hidden behind the navbar */}
+      <main>
         <Hero />
       </main>
       <About />

@@ -1,10 +1,16 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { hover, motion } from 'framer-motion';
 import { Github, Linkedin, Instagram, MessageCircle, Bot, Cpu } from 'lucide-react';
 import confetti from 'canvas-confetti';
+
 import profileImg from '../assets/profile.png';
+import hoverImg from '../assets/mog.png';
 
 const Hero = () => {
+
+  // For testing purposes right now, I'm using a placeholder URL. 
+  // Replace this variable with your imported image variable (e.g., hoverImg) when you have it!
+  const myHoverImage = hoverImg;
 
   const handleConfetti = () => {
     confetti({
@@ -49,10 +55,6 @@ const Hero = () => {
               transition={{ duration: 1, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
               className="absolute -top-8 left-1/2 -translate-x-1/2 z-20 pointer-events-none"
             >
-              <div className="bg-cyan-500 text-black text-[10px] font-extrabold px-2 py-1 rounded-full shadow-[0_0_10px_rgba(6,182,212,0.8)] whitespace-nowrap relative">
-                CLICK ME!
-                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-cyan-500 rotate-45" />
-              </div>
             </motion.div>
 
             <motion.div 
@@ -85,7 +87,7 @@ const Hero = () => {
             that connect software logic with real-world hardware.
           </p>
 
-          {/* Buttons (Internal links can stay as is) */}
+          {/* Buttons */}
           <div className="flex flex-wrap gap-6 mb-10">
             <a href="#contact" className="px-8 py-3 bg-[#0a0a12] border border-gray-500 text-white font-bold rounded-full transition-all duration-150 transform shadow-[0_4px_0_rgb(107,114,128)] hover:scale-105 hover:bg-cyan-500 hover:border-cyan-500 hover:text-black hover:shadow-[0_4px_0_rgb(8,145,178)] hover:drop-shadow-[0_0_15px_rgba(6,182,212,0.8)] active:shadow-none active:translate-y-[4px] active:scale-100">
               Contact me
@@ -95,9 +97,8 @@ const Hero = () => {
             </a>
           </div>
 
-          {/* --- SOCIAL ICONS (FIXED LINKS) --- */}
+          {/* --- SOCIAL ICONS --- */}
           <div className="flex gap-4">
-            {/* Replace these URLs with your actual profile links */}
             <SocialBtn icon={<Github size={20} />} href="https://github.com/jesselsajulga" />
             <SocialBtn icon={<MessageCircle size={20} />} href="https://www.facebook.com/itsmejesselsajulga" />
             <SocialBtn icon={<Linkedin size={20} />} href="https://www.linkedin.com/in/jessel-rome-b-sajulga-b22b843a4/" />
@@ -123,7 +124,7 @@ const Hero = () => {
             <motion.div 
               animate={{ y: [0, -8, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              className="absolute -top-6 -right-6 bg-[#3b82f6] text-white px-5 py-3 rounded-2xl shadow-[0_10px_20px_rgba(59,130,246,0.4)] flex items-center gap-2 z-30"
+              className="absolute -top-6 -right-6 bg-[#3b82f6] text-white px-5 py-3 rounded-2xl shadow-[0_10px_20px_rgba(59,130,246,0.4)] flex items-center gap-2 z-30 pointer-events-none"
             >
               <Bot size={20} className="text-white" />
               <span className="font-bold text-sm tracking-wide">Robotics</span>
@@ -132,14 +133,31 @@ const Hero = () => {
             <motion.div 
               animate={{ y: [0, -8, 0] }}
               transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-              className="absolute -bottom-6 -left-6 bg-purple-600 text-white px-5 py-3 rounded-2xl shadow-[0_10px_20px_rgba(147,51,234,0.4)] flex items-center gap-2 z-30"
+              className="absolute -bottom-6 -left-6 bg-purple-600 text-white px-5 py-3 rounded-2xl shadow-[0_10px_20px_rgba(147,51,234,0.4)] flex items-center gap-2 z-30 pointer-events-none"
             >
               <Cpu size={20} className="text-white" />
               <span className="font-bold text-sm tracking-wide">Computer Eng.</span>
             </motion.div>
 
-            <div className="bg-white rounded-[2rem] overflow-hidden relative z-20">
-               <img src={profileImg} alt="Jessel Rome" className="w-full h-auto object-cover transform scale-100 hover:scale-105 transition-transform duration-500" />
+            {/* --- UPDATED: HOVER IMAGE CROSSFADE CONTAINER --- */}
+            <div className="bg-white rounded-[2rem] overflow-hidden relative z-20 group cursor-pointer">
+               
+               {/* 1. Primary Image (Always there, controls the height of the box) */}
+               <img 
+                 src={profileImg} 
+                 alt="Jessel Rome" 
+                 className="w-full h-auto object-cover transform transition-all duration-500 group-hover:scale-105" 
+               />
+               
+               {/* 2. Secondary/Hover Image (Sits perfectly on top, invisible until hovered) */}
+               <img 
+                 src={myHoverImage} 
+                 alt="Jessel Rome Alternate" 
+                 // absolute inset-0 glues this image exactly over the first one
+                 // opacity-0 hides it normally, group-hover:opacity-100 reveals it on hover
+                 className="absolute inset-0 w-full h-full object-cover transform transition-all duration-500 opacity-0 group-hover:opacity-100 group-hover:scale-105" 
+               />
+               
             </div>
           </motion.div>
         </motion.div>
@@ -149,13 +167,13 @@ const Hero = () => {
   );
 };
 
-// --- UPDATED SOCIAL BUTTON COMPONENT ---
+// --- SOCIAL BUTTON COMPONENT ---
 const SocialBtn = ({ icon, href }) => {
   return (
     <a 
       href={href} 
-      target="_blank" // Opens link in a new tab
-      rel="noopener noreferrer" // Security best practice for new tabs
+      target="_blank" 
+      rel="noopener noreferrer" 
       className="w-12 h-12 flex items-center justify-center rounded-full 
                  bg-[#0a0a12] border border-gray-600 text-gray-400 
                  transition-all duration-150 transform 

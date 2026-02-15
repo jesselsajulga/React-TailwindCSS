@@ -60,74 +60,7 @@ const Works = () => {
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         className="absolute -bottom-40 -right-40 w-[600px] h-[600px] bg-purple-600/20 rounded-full blur-[120px] pointer-events-none z-0"
       />
-
-      {/* --- CUSTOM COMIC BADGES (With Entrance Animations) --- */}
-      <div className="absolute inset-0 pointer-events-none z-10 overflow-visible">
-        
-        {/* 1. TOP LEFT: "Thought Cloud" (Cyan) */}
-        <motion.div
-          // ENTRANCE ANIMATION (Pop in from scale 0)
-          initial={{ opacity: 0, scale: 0, rotate: -20 }}
-          whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-          viewport={{ once: false }} // Re-animates when scrolled
-          transition={{ duration: 0.6, type: "spring", bounce: 0.4 }}
-          className="absolute top-40 left-4 md:left-10 lg:left-20 w-40 h-32"
-        >
-          {/* CONTINUOUS FLOAT ANIMATION */}
-          <motion.div
-            animate={{ y: [0, -15, 0], rotate: [-5, -8, -5] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            className="w-full h-full flex items-center justify-center"
-          >
-            {/* SVG Cloud Shape */}
-            <svg viewBox="0 0 200 160" className="absolute w-full h-full drop-shadow-[4px_4px_0px_rgba(6,182,212,0.4)]">
-              <path 
-                d="M160,60 Q190,20 190,80 Q200,130 150,140 Q110,160 70,140 Q20,150 20,100 Q-10,50 50,40 Q70,0 120,20 Q150,10 160,60 Z" 
-                fill="#1a1a2e" 
-                stroke="#06b6d4" 
-                strokeWidth="3"
-              />
-            </svg>
-            <span className="relative text-cyan-400 font-bold text-sm tracking-widest z-10 rotate-[-2deg]">
-              DREAMER 💭
-            </span>
-          </motion.div>
-        </motion.div>
-
-        {/* 2. RIGHT SIDE GAP: "Action Burst" (Purple) */}
-        <motion.div
-          // ENTRANCE ANIMATION (Pop in from scale 0)
-          initial={{ opacity: 0, scale: 0, rotate: 20 }}
-          whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-          viewport={{ once: false }} // Re-animates when scrolled
-          transition={{ duration: 0.6, type: "spring", bounce: 0.4, delay: 0.2 }}
-          className="absolute top-[55%] -translate-y-1/2 right-2 md:right-8 lg:right-16 w-44 h-36"
-        >
-          {/* CONTINUOUS FLOAT ANIMATION */}
-          <motion.div
-             animate={{ y: [0, -12, 0], rotate: [5, 8, 5], scale: [1, 1.05, 1] }}
-             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-             className="w-full h-full flex items-center justify-center"
-          >
-            {/* SVG Burst Shape */}
-            <svg viewBox="0 0 200 160" className="absolute w-full h-full drop-shadow-[4px_4px_0px_rgba(168,85,247,0.4)]">
-              <path 
-                d="M100,10 L120,40 L160,20 L150,60 L190,80 L150,100 L170,140 L120,130 L90,155 L70,125 L30,140 L50,90 L10,70 L60,50 L40,10 Z" 
-                fill="#1a1a2e" 
-                stroke="#a855f7" 
-                strokeWidth="3"
-                strokeLinejoin="round"
-              />
-            </svg>
-            <span className="relative text-purple-400 font-bold text-sm tracking-widest z-10 rotate-[2deg]">
-              BUILDER ⚡
-            </span>
-          </motion.div>
-        </motion.div>
-
-      </div>
-
-
+      
       <div className="max-w-7xl mx-auto w-full relative z-20">
         
         {/* --- SECTION HEADER --- */}
