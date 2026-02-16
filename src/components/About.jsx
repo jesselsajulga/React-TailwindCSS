@@ -170,23 +170,57 @@ const About = () => {
                ) : (
                  
                  /* 2. SHOW DEFAULT BIO IF NOT HOVERED */
+                 /* 2. SHOW DEFAULT BIO IF NOT HOVERED */
                  <motion.div 
                    key="bio"
-                   initial={{ opacity: 0, x: -20 }}
-                   animate={{ opacity: 1, x: 0 }}
-                   exit={{ opacity: 0, x: -20 }}
+                   initial={{ opacity: 0 }}
+                   animate={{ opacity: 1 }}
+                   exit={{ opacity: 0 }}
                    transition={{ duration: 0.3 }}
-                   className="bg-[#11111a]/80 h-full backdrop-blur-sm border border-white/5 p-8 md:p-10 rounded-3xl relative overflow-hidden shadow-2xl group hover:border-cyan-500/30 transition-colors duration-500 z-20 cursor-default flex flex-col justify-center"
+                   // This is the trigger: When this div is hovered, play "hover" on all children
+                   whileHover="hover" 
+                   // Note: 'group' is still here for the CSS gradient hover, but Framer Motion handles the ripples
+                   className="absolute inset-0 w-full h-full bg-[#11111a]/80 backdrop-blur-sm border border-white/5 p-8 md:p-10 rounded-3xl shadow-2xl group transition-colors duration-500 z-10 flex flex-col justify-center"
                  >
-                   <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                    
+                   {/* --- RIPPLE RING 1 (Cyan) --- */}
+                   <motion.div
+                     variants={{
+                       hover: {
+                         opacity: [0, 0.6, 0],
+                         scale: [1, 1.04, 1.1], // Slightly increased scale for better visibility
+                         transition: { duration: 1.5, repeat: Infinity, ease: "easeOut" }
+                       }
+                     }}
+                     // Must have an initial state defined for the variant to start from
+                     initial={{ opacity: 0, scale: 1 }}
+                     className="absolute inset-0 rounded-3xl border-2 border-cyan-400 pointer-events-none"
+                   />
+
+                   {/* --- RIPPLE RING 2 (Purple - Delayed) --- */}
+                   <motion.div
+                     variants={{
+                       hover: {
+                         opacity: [0, 0.6, 0],
+                         scale: [1, 1.04, 1.1],
+                         transition: { duration: 1.5, repeat: Infinity, ease: "easeOut", delay: 0.4 } // Slight delay
+                       }
+                     }}
+                     initial={{ opacity: 0, scale: 1 }}
+                     className="absolute inset-0 rounded-3xl border-2 border-purple-500 pointer-events-none"
+                   />
+
+                   {/* Background Gradient Hover (Handled by CSS 'group') */}
+                   <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-cyan-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                   
+                   {/* --- EXISTING CONTENT --- */}
                    <h3 className="text-2xl font-bold text-white mb-6 relative z-10">
                      Yo, Yours truly, Jessel Rome Sajulga, <br/>
                      a promising Computer Engineer <br/>
                      from USTP.
                    </h3>
                    
-                   <div className="space-y-4 text-gray-400 leading-relaxed relative z-10">
+                   <div className="space-y-4 text-gray-400 leading-relaxed relative z-10 pointer-events-none">
                      <p>
                        Inspiration comes from seeing how abstract logic can be 
                        transformed into working machines that interact with and shape 
