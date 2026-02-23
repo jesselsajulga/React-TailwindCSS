@@ -136,7 +136,7 @@ const Hero = () => {
               className="absolute -bottom-6 -left-6 bg-purple-600 text-white px-5 py-3 rounded-2xl shadow-[0_10px_20px_rgba(147,51,234,0.4)] flex items-center gap-2 z-30 pointer-events-none"
             >
               <Cpu size={20} className="text-white" />
-              <span className="font-bold text-sm tracking-wide">Computer Eng.</span>
+              <span className="font-bold text-sm tracking-wide">Computer Engr.</span>
             </motion.div>
 
             {/* --- UPDATED: HOVER IMAGE CROSSFADE CONTAINER --- */}
