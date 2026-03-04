@@ -7,7 +7,6 @@ import autoImage from '../assets/automation.gif';
 import problemImage from '../assets/problem.gif';
 
 const About = () => {
-  // State to track which skill is hovered
   const [hoveredSkill, setHoveredSkill] = useState(null);
 
   const skills = [
@@ -16,16 +15,15 @@ const About = () => {
       icon: <Cpu size={24} />, 
       title: "Embedded Systems", 
       desc: "Hardware-software integration",
-      // Add specific media for each skill here
-      media: embeddedImage, // Example Chip Image
-      type: "image" // or "video"
+      media: embeddedImage, 
+      type: "image" 
     },
     { 
       id: "robotics",
       icon: <Bot size={24} />, 
       title: "Robotics", 
       desc: "Intelligent machine design",
-      media: robotImage, // Example Robot Image
+      media: robotImage, 
       type: "image"
     },
     { 
@@ -33,7 +31,7 @@ const About = () => {
       icon: <Zap size={24} />, 
       title: "Automation", 
       desc: "Smart system solutions",
-      media: autoImage, // Example Automation Image
+      media: autoImage, 
       type: "image"
     },
     { 
@@ -41,7 +39,7 @@ const About = () => {
       icon: <Award size={24} />, 
       title: "Problem Solving", 
       desc: "Practical engineering",
-      media: problemImage, // Example Engineering Image
+      media: problemImage, 
       type: "image"
     },
   ];
@@ -49,7 +47,7 @@ const About = () => {
   return (
     <section 
       id="about" 
-      className="min-h-screen flex flex-col justify-start pt-32 pb-20 px-6 bg-[#0a0a12] relative overflow-hidden"
+      className="min-h-[100dvh] flex flex-col justify-start pt-32 pb-20 px-4 md:px-6 bg-[#0a0a12] relative overflow-hidden"
     >
       
       {/* --- BACKGROUND LIGHTS --- */}
@@ -79,26 +77,24 @@ const About = () => {
           initial={{ opacity: 0, y: 50, scale: 0.9 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          viewport={{ once: false, amount: 0.3 }}
-          className="text-center mb-16"
+          viewport={{ once: true, amount: 0.1 }}
+          className="text-center mb-12 md:mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
             About <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">Me</span>
           </h2>
-          <p className="text-gray-400 text-lg">
+          <p className="text-gray-400 text-base md:text-lg">
             Get to know more about my journey and passion
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-stretch relative mb-12 min-h-[500px]"> 
-        {/* Added min-h-[500px] and items-stretch to keep layout stable */}
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-stretch relative mb-12"> 
            
-           {/* --- FLOATING BADGES (Hidden on Hover to reduce clutter, optional) --- */}
-           {/* Badge 1: Visionary */}
+           {/* --- FLOATING BADGES (Hidden on Mobile) --- */}
            <motion.div
              initial={{ opacity: 0, scale: 0, rotate: -20 }}
              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-             viewport={{ once: false, amount: 0.5 }}
+             viewport={{ once: true, amount: 0.5 }}
              transition={{ duration: 0.5, delay: 0.2, type: "spring", stiffness: 100 }}
              className="hidden md:block absolute -top-8 -left-8 z-30 pointer-events-none"
            >
@@ -112,11 +108,10 @@ const About = () => {
              </motion.div>
            </motion.div>
 
-           {/* Badge 2: Developer */}
            <motion.div
              initial={{ opacity: 0, scale: 0, rotate: 20 }}
              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-             viewport={{ once: false, amount: 0.5 }}
+             viewport={{ once: true, amount: 0.5 }}
              transition={{ duration: 0.5, delay: 0.4, type: "spring", stiffness: 100 }}
              className="hidden md:block absolute -bottom-6 right-1/2 translate-x-10 z-30 pointer-events-none"
            >
@@ -132,26 +127,24 @@ const About = () => {
 
 
            {/* --- LEFT COLUMN: DYNAMIC CONTENT (BIO vs MEDIA) --- */}
-           <div className="relative h-full"> 
+           {/* FIX: Added min-h-[450px] on mobile to prevent layout collapse */}
+           <div className="relative min-h-[450px] md:min-h-[500px] h-full w-full"> 
              <AnimatePresence mode="wait">
                
-               {/* 1. SHOW MEDIA IF HOVERED */}
                {hoveredSkill ? (
                  <motion.div
-                   key="media" // Key allows Framer Motion to swap elements
+                   key="media" 
                    initial={{ opacity: 0, scale: 0.9, x: -20 }}
                    animate={{ opacity: 1, scale: 1, x: 0 }}
                    exit={{ opacity: 0, scale: 0.95, x: 20 }}
                    transition={{ duration: 0.3 }}
-                   className="h-full w-full bg-[#11111a] border border-cyan-500/50 p-2 rounded-3xl shadow-[0_0_30px_rgba(34,211,238,0.2)] overflow-hidden relative"
+                   className="absolute inset-0 w-full h-full bg-[#11111a] border border-cyan-500/50 p-2 rounded-3xl shadow-[0_0_30px_rgba(34,211,238,0.2)] overflow-hidden"
                  >
-                   {/* Overlay Text */}
-                   <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/90 to-transparent z-10">
-                      <h3 className="text-2xl font-bold text-white mb-1">{hoveredSkill.title}</h3>
-                      <p className="text-cyan-400 text-sm">{hoveredSkill.desc}</p>
+                   <div className="absolute bottom-0 left-0 w-full p-4 md:p-6 bg-gradient-to-t from-black/90 to-transparent z-10">
+                      <h3 className="text-xl md:text-2xl font-bold text-white mb-1">{hoveredSkill.title}</h3>
+                      <p className="text-cyan-400 text-xs md:text-sm">{hoveredSkill.desc}</p>
                    </div>
 
-                   {/* Render Image or Video */}
                    {hoveredSkill.type === 'video' ? (
                       <video 
                         src={hoveredSkill.media} 
@@ -169,58 +162,50 @@ const About = () => {
 
                ) : (
                  
-                 /* 2. SHOW DEFAULT BIO IF NOT HOVERED */
-                 /* 2. SHOW DEFAULT BIO IF NOT HOVERED */
                  <motion.div 
                    key="bio"
                    initial={{ opacity: 0 }}
                    animate={{ opacity: 1 }}
                    exit={{ opacity: 0 }}
                    transition={{ duration: 0.3 }}
-                   // This is the trigger: When this div is hovered, play "hover" on all children
                    whileHover="hover" 
-                   // Note: 'group' is still here for the CSS gradient hover, but Framer Motion handles the ripples
-                   className="absolute inset-0 w-full h-full bg-[#11111a]/80 backdrop-blur-sm border border-white/5 p-8 md:p-10 rounded-3xl shadow-2xl group transition-colors duration-500 z-10 flex flex-col justify-center"
+                   // FIX: Adjusted padding for mobile (p-6) vs desktop (md:p-10)
+                   className="absolute inset-0 w-full h-full bg-[#11111a]/80 backdrop-blur-sm border border-white/5 p-6 md:p-10 rounded-3xl shadow-2xl group transition-colors duration-500 z-10 flex flex-col justify-center"
                  >
-                   
-                   {/* --- RIPPLE RING 1 (Cyan) --- */}
-                   <motion.div
-                     variants={{
-                       hover: {
-                         opacity: [0, 0.6, 0],
-                         scale: [1, 1.04, 1.1], // Slightly increased scale for better visibility
-                         transition: { duration: 1.5, repeat: Infinity, ease: "easeOut" }
-                       }
-                     }}
-                     // Must have an initial state defined for the variant to start from
-                     initial={{ opacity: 0, scale: 1 }}
-                     className="absolute inset-0 rounded-3xl border-2 border-cyan-400 pointer-events-none"
-                   />
-
-                   {/* --- RIPPLE RING 2 (Purple - Delayed) --- */}
                    <motion.div
                      variants={{
                        hover: {
                          opacity: [0, 0.6, 0],
                          scale: [1, 1.04, 1.1],
-                         transition: { duration: 1.5, repeat: Infinity, ease: "easeOut", delay: 0.4 } // Slight delay
+                         transition: { duration: 1.5, repeat: Infinity, ease: "easeOut" }
+                       }
+                     }}
+                     initial={{ opacity: 0, scale: 1 }}
+                     className="absolute inset-0 rounded-3xl border-2 border-cyan-400 pointer-events-none"
+                   />
+
+                   <motion.div
+                     variants={{
+                       hover: {
+                         opacity: [0, 0.6, 0],
+                         scale: [1, 1.04, 1.1],
+                         transition: { duration: 1.5, repeat: Infinity, ease: "easeOut", delay: 0.4 } 
                        }
                      }}
                      initial={{ opacity: 0, scale: 1 }}
                      className="absolute inset-0 rounded-3xl border-2 border-purple-500 pointer-events-none"
                    />
 
-                   {/* Background Gradient Hover (Handled by CSS 'group') */}
                    <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-cyan-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                    
-                   {/* --- EXISTING CONTENT --- */}
-                   <h3 className="text-2xl font-bold text-white mb-6 relative z-10">
+                   {/* FIX: Scaled down text size and margin on mobile */}
+                   <h3 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6 relative z-10">
                      Yo, Yours truly, Jessel Rome Sajulga, <br/>
                      a promising Computer Engineer <br/>
                      from USTP.
                    </h3>
                    
-                   <div className="space-y-4 text-gray-400 leading-relaxed relative z-10 pointer-events-none">
+                   <div className="space-y-3 md:space-y-4 text-sm md:text-base text-gray-400 leading-relaxed relative z-10 pointer-events-none">
                      <p>
                        Inspiration comes from seeing how abstract logic can be 
                        transformed into working machines that interact with and shape 
@@ -240,39 +225,38 @@ const About = () => {
              </AnimatePresence>
            </div>
 
-           {/* --- RIGHT COLUMN: SKILLS (Triggers) --- */}
-           <div className="flex flex-col gap-6 z-20 justify-center">
+           {/* --- RIGHT COLUMN: SKILLS --- */}
+           <div className="flex flex-col gap-4 md:gap-6 z-20 justify-center">
              {skills.map((item, index) => (
                <motion.div
                  key={index}
-                 // --- HOVER EVENTS ---
-                 onMouseEnter={() => setHoveredSkill(item)} // Set the current skill
-                 onMouseLeave={() => setHoveredSkill(null)} // Reset when leaving
+                 onMouseEnter={() => setHoveredSkill(item)} 
+                 onMouseLeave={() => setHoveredSkill(null)} 
                  
                  initial={{ opacity: 0, x: 50, scale: 0.95 }}
                  whileInView={{ opacity: 1, x: 0, scale: 1 }}
                  whileHover={{ scale: 1.05, x: 10, borderColor: "rgba(34,211,238,0.5)" }}
                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                 viewport={{ once: false, amount: 0.3 }}
+                 viewport={{ once: true, amount: 0.1 }} // FIX: Prevents animation getting stuck
                  
-                 // Added conditional styling if this specific item is the active one
-                 className={`flex items-center gap-6 p-6 rounded-2xl backdrop-blur-sm border transition-all duration-300 group cursor-pointer
+                 // FIX: Slightly reduced padding on mobile (p-4)
+                 className={`flex items-center gap-4 md:gap-6 p-4 md:p-6 rounded-2xl backdrop-blur-sm border transition-all duration-300 group cursor-pointer
                    ${hoveredSkill?.id === item.id 
-                     ? "bg-white/10 border-cyan-500 shadow-[0_0_20px_rgba(6,182,212,0.2)]" // Active State
-                     : "bg-[#11111a]/80 border-white/5 hover:bg-white/5" // Default State
+                     ? "bg-white/10 border-cyan-500 shadow-[0_0_20px_rgba(6,182,212,0.2)]" 
+                     : "bg-[#11111a]/80 border-white/5 hover:bg-white/5" 
                    }
                  `}
                >
-                 <div className={`w-14 h-14 flex-shrink-0 flex items-center justify-center rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(6,182,212,0.15)]
+                 <div className={`w-12 h-12 md:w-14 md:h-14 flex-shrink-0 flex items-center justify-center rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(6,182,212,0.15)]
                     ${hoveredSkill?.id === item.id ? "bg-cyan-500 text-black shadow-[0_0_20px_rgba(6,182,212,0.6)]" : "bg-cyan-500/10 text-cyan-400"}
                  `}>
                    {item.icon}
                  </div>
                  <div>
-                   <h4 className={`text-lg font-bold transition-colors mb-1 ${hoveredSkill?.id === item.id ? "text-cyan-400" : "text-white"}`}>
+                   <h4 className={`text-base md:text-lg font-bold transition-colors mb-1 ${hoveredSkill?.id === item.id ? "text-cyan-400" : "text-white"}`}>
                      {item.title}
                    </h4>
-                   <p className="text-sm text-gray-500 group-hover:text-gray-300 transition-colors">
+                   <p className="text-xs md:text-sm text-gray-500 group-hover:text-gray-300 transition-colors">
                      {item.desc}
                    </p>
                  </div>
@@ -281,12 +265,12 @@ const About = () => {
            </div>
         </div>
 
-        {/* --- ULTRA-COMPACT CONNECT BAR --- */}
+        {/* --- CONNECT BAR --- */}
         <motion.div 
           initial={{ opacity: 0, y: 50, scale: 0.9 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: false, amount: 0.5 }} 
+          viewport={{ once: true, amount: 0.1 }} 
           className="w-full relative z-20"
         >
           <div className="relative overflow-hidden rounded-2xl p-4 px-6 md:px-8 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-4">
@@ -318,7 +302,7 @@ const About = () => {
   );
 };
 
-// --- UPDATED BUTTON COMPONENT (Opens in New Tab) ---
+// --- COMPACT BUTTON ---
 const CompactSocialBtn = ({ icon, href, color }) => {
   return (
     <a 

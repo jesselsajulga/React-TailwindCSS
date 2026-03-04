@@ -112,7 +112,8 @@ const Works = () => {
         </motion.div>
 
         <LayoutGroup>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start h-[700px] w-full">
+          {/* FIX: Changed h-[700px] to lg:h-[700px] so mobile can expand naturally */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start lg:h-[700px] w-full">
 
             {/* --- LEFT PANEL: DIRECTORY TREE --- */}
             <motion.div
@@ -121,7 +122,7 @@ const Works = () => {
               className={`bg-[#11111a]/90 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl flex flex-col mx-auto
                 ${explorerPhase === 'INIT'
                   ? 'w-[280px] h-[64px] cursor-pointer hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(34,211,238,0.2)] hover:-translate-y-1 transition-all lg:col-span-12'
-                  : 'w-full h-full lg:col-span-5 xl:col-span-4'
+                  : 'w-full h-[450px] lg:h-full lg:col-span-5 xl:col-span-4' // FIX: Hardcoded mobile explorer height to 450px
                 }`}
               onClick={() => {
                 if (explorerPhase === 'INIT') setExplorerPhase('OPENED');
@@ -214,7 +215,7 @@ const Works = () => {
                                       return (
                                         <div
                                           key={project.id}
-                                          // --- UPDATED: PURE HOVER MECHANICS ---
+                                          // FIX: Removed onMouseLeave. The panel now stays open on scroll/mobile.
                                           onMouseEnter={() => setActiveProject(project)}
                                           onMouseLeave={() => setActiveProject(null)}
                                           className={`flex items-center gap-2 px-2 py-1.5 rounded-lg cursor-pointer transition-all duration-200
@@ -255,7 +256,8 @@ const Works = () => {
                   animate={{ opacity: 1, scale: 1, x: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={springTransition}
-                  className="w-full h-full lg:col-span-7 xl:col-span-8 bg-[#11111a]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 flex flex-col shadow-2xl relative overflow-hidden pointer-events-none" // pointer-events-none ensures it doesn't interrupt mouse flows
+                  // FIX: Changed from h-full to h-auto lg:h-full, and removed pointer-events-none so users can scroll long text
+                  className="w-full h-auto lg:h-full lg:col-span-7 xl:col-span-8 bg-[#11111a]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 flex flex-col shadow-2xl relative overflow-hidden" 
                 >
                   <AnimatePresence mode="wait">
                     <motion.div
@@ -268,7 +270,8 @@ const Works = () => {
                     >
                       <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-cyan-500/5 rounded-full blur-[100px]" />
 
-                      <div className="w-full h-[250px] md:h-[350px] rounded-xl overflow-hidden relative border border-white/10 mb-8 bg-black/50 flex-shrink-0">
+                      {/* FIX: Gave the image container a flexible height specifically for mobile */}
+                      <div className="w-full h-[200px] lg:h-[350px] rounded-xl overflow-hidden relative border border-white/10 mb-6 lg:mb-8 bg-black/50 flex-shrink-0">
                         <div className="absolute inset-0 bg-gradient-to-t from-[#11111a] via-transparent to-transparent opacity-60 z-10" />
                         <img src={activeProject.image} alt={activeProject.title} className="w-full h-full object-cover" />
                       </div>
@@ -293,7 +296,6 @@ const Works = () => {
                               </span>
                             ))}
                           </div>
-                          {/* --- REMOVED: View Source Button --- */}
                         </div>
                       </div>
                     </motion.div>
