@@ -154,7 +154,8 @@ const About = () => {
                    ) : (
                       <img 
                         src={hoveredSkill.media} 
-                        alt={hoveredSkill.title} 
+                        alt={hoveredSkill.title}
+                        loading="lazy" 
                         className="w-full h-full object-cover rounded-2xl"
                       />
                    )}

@@ -273,7 +273,7 @@ const Works = () => {
                       {/* FIX: Gave the image container a flexible height specifically for mobile */}
                       <div className="w-full h-[200px] lg:h-[350px] rounded-xl overflow-hidden relative border border-white/10 mb-6 lg:mb-8 bg-black/50 flex-shrink-0">
                         <div className="absolute inset-0 bg-gradient-to-t from-[#11111a] via-transparent to-transparent opacity-60 z-10" />
-                        <img src={activeProject.image} alt={activeProject.title} className="w-full h-full object-cover" />
+                        <img src={activeProject.image} alt={activeProject.title} loading="lazy" className="w-full h-full object-cover" />
                       </div>
 
                       <div className="flex-1 flex flex-col relative z-20">
