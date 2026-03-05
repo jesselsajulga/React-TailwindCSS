@@ -2,25 +2,25 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
 import { ChevronRight, ChevronDown, Folder, FolderOpen, File, Terminal, X } from 'lucide-react';
 
-import project1 from '../assets/project1.jpg';
-import project2 from '../assets/project2.jpg';
-import project3 from '../assets/project3.jpg';
-import project4 from '../assets/project4.jpg';
-import project5 from '../assets/project5.png';
-import project6 from '../assets/project6.png';
-import project7 from '../assets/project7.png';
-import project8 from '../assets/project8.png';
-import project9 from '../assets/project9.png';
-import project10 from '../assets/project10.png';
-import project11 from '../assets/project11.png';
-import project12 from '../assets/project12.png';
-import project13 from '../assets/project13.png';
-import project14 from '../assets/project14.png';
-import project15 from '../assets/project15.png';
-import project16 from '../assets/project16.png';
-import project17 from '../assets/project17.png';
-import project18 from '../assets/project18.png';
-import project19 from '../assets/project19.png';
+import project1 from '../assets/project1.webp';
+import project2 from '../assets/project2.webp';
+import project3 from '../assets/project3.webp';
+import project4 from '../assets/project4.webp';
+import project5 from '../assets/project5.webp';
+import project6 from '../assets/project6.webp';
+import project7 from '../assets/project7.webp';
+import project8 from '../assets/project8.webp';
+import project9 from '../assets/project9.webp';
+import project10 from '../assets/project10.webp';
+import project11 from '../assets/project11.webp';
+import project12 from '../assets/project12.webp';
+import project13 from '../assets/project13.webp';
+import project14 from '../assets/project14.webp';
+import project15 from '../assets/project15.webp';
+import project16 from '../assets/project16.webp';
+import project17 from '../assets/project17.webp';
+import project18 from '../assets/project18.webp';
+import project19 from '../assets/project19.webp';
 
 const Works = () => {
   // --- STRUCTURED TREE DATA ---
@@ -257,7 +257,7 @@ const Works = () => {
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={springTransition}
                   // FIX: Changed from h-full to h-auto lg:h-full, and removed pointer-events-none so users can scroll long text
-                  className="w-full h-auto lg:h-full lg:col-span-7 xl:col-span-8 bg-[#11111a]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 flex flex-col shadow-2xl relative overflow-hidden" 
+                  className="w-full h-auto lg:h-full lg:col-span-7 xl:col-span-8 bg-[#11111a]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 flex flex-col shadow-2xl relative overflow-hidden"
                 >
                   <AnimatePresence mode="wait">
                     <motion.div

@@ -1,31 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import shrekMotion from '../assets/shrek.gif';
-import shrekStatic from '../assets/shrek.png';
-import faceMotion from '../assets/face.gif';
-import faceStatic from '../assets/face.png';
-import frogMotion from '../assets/frog.gif';
+import shrekMotion from '../assets/shrek.webm';
+import shrekStatic from '../assets/shrek.webp';
+import faceMotion from '../assets/face.webm';
+import faceStatic from '../assets/face.webp';
+import frogMotion from '../assets/frog.webm';
 import frogStatic from '../assets/frog.png';
+import throttle from 'lodash/throttle';
 
 
 const avatarData = [
-  { 
-    id: 1, 
+  {
+    id: 1,
     name: "Shrek",
     static: shrekStatic,
     animated: shrekMotion
   },
-  { 
-    id: 2, 
+  {
+    id: 2,
     name: "Face",
     static: faceStatic,
     animated: faceMotion
   },
   {
-    id: 3, 
+    id: 3,
     name: "Frog",
-    static: frogStatic, 
+    static: frogStatic,
     animated: frogMotion
   },
 ];
@@ -36,16 +37,44 @@ const Navbar = () => {
 
   // Avatar States
   const [avatarIndex, setAvatarIndex] = useState(0);
-  const [isAvatarHovered, setIsAvatarHovered] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.matchMedia('(hover: none) and (pointer: coarse)').matches);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const cycleAvatar = () => {
     setAvatarIndex((prevIndex) => (prevIndex + 1) % avatarData.length);
   };
   const currentAvatar = avatarData[avatarIndex];
 
+  const handleAvatarClick = () => {
+    cycleAvatar();
+    setIsPlaying(true);
+  };
+
+  const handleMouseEnter = () => {
+    if (!isMobile) setIsPlaying(true);
+  };
+
+  const handleMouseLeave = () => {
+    if (!isMobile) setIsPlaying(false);
+  };
+
+  const handleVideoEnded = () => {
+    setIsPlaying(false);
+  };
+
   // Scroll Spy Logic
   useEffect(() => {
-    const handleScroll = () => {
+    // Throttle the scroll handler to run at most once every 100ms
+    const handleScroll = throttle(() => {
       if (typeof window === 'undefined') return;
       const scrollPosition = window.scrollY + 200;
       navLinks.forEach((link) => {
@@ -57,9 +86,13 @@ const Navbar = () => {
           }
         }
       });
+    }, 100);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      handleScroll.cancel(); // Cancel any pending throttled calls on cleanup
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navLinks = [
@@ -71,15 +104,15 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 w-full z-50 px-4 md:px-8 py-6 transition-all duration-300">
-      
+
       {/* MAIN LAYOUT WRAPPER (Flex to put Avatar and Navbar side-by-side) */}
       <div className="max-w-[1400px] mx-auto flex items-start gap-3 md:gap-5">
-        
+
         {/* --- 1. THE SEPARATE AVATAR BOX (Outside the pill) --- */}
         <motion.div
-          onClick={cycleAvatar}
-          onMouseEnter={() => setIsAvatarHovered(true)}
-          onMouseLeave={() => setIsAvatarHovered(false)}
+          onClick={handleAvatarClick}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
           whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
           whileTap={{ scale: 0.9 }}
           // Added a slight margin-top (mt-1) so it aligns perfectly with the text inside the pill
@@ -87,19 +120,36 @@ const Navbar = () => {
           title="Click to change character!"
         >
           <AnimatePresence mode="wait">
-            <motion.img
-              key={isAvatarHovered ? currentAvatar.animated : currentAvatar.static}
-              src={isAvatarHovered ? currentAvatar.animated : currentAvatar.static}
-              alt={currentAvatar.name}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="w-full h-full object-cover"
-            />
+            {isPlaying ? (
+              <motion.video
+                key={`${currentAvatar.id}-video`}
+                src={currentAvatar.animated}
+                autoPlay
+                muted
+                playsInline
+                controls={false}
+                onEnded={handleVideoEnded}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <motion.img
+                key={`${currentAvatar.id}-img`}
+                src={currentAvatar.static}
+                alt={currentAvatar.name}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="w-full h-full object-cover"
+              />
+            )}
           </AnimatePresence>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             whileHover={{ opacity: 1 }}
             className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end justify-center pb-1 pointer-events-none"
@@ -116,11 +166,11 @@ const Navbar = () => {
           transition-all duration-300
           ${isOpen ? 'rounded-b-2xl' : ''}`}
         >
-          
+
           <div className="flex justify-between items-center">
             {/* --- LOGO --- */}
-            <a 
-              href="#home" 
+            <a
+              href="#home"
               onClick={() => setActiveTab('Home')}
               className="cursor-pointer group relative z-50"
             >
@@ -128,7 +178,7 @@ const Navbar = () => {
                 group-hover:scale-105 
                 drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]"
               >
-                  JESSEL'S MINI SHOWROOM
+                JESSEL'S MINI SHOWROOM
               </span>
             </a>
 
@@ -157,8 +207,8 @@ const Navbar = () => {
             </ul>
 
             {/* --- MOBILE TOGGLE BUTTON --- */}
-            <button 
-              onClick={() => setIsOpen(!isOpen)} 
+            <button
+              onClick={() => setIsOpen(!isOpen)}
               className="md:hidden text-white hover:text-cyan-400 transition-colors relative z-50"
             >
               {isOpen ? <X size={28} /> : <Menu size={28} />}
