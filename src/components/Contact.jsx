@@ -4,8 +4,8 @@ import { Mail, Github, Linkedin, Instagram, MessageCircle } from 'lucide-react';
 
 const Contact = () => {
   return (
-    <section 
-      id="contact" 
+    <section
+      id="contact"
       className="min-h-screen bg-[#0a0a12] py-32 px-6 relative overflow-hidden flex flex-col justify-center"
     >
       {/* --- BACKGROUND GLOWS --- */}
@@ -16,9 +16,9 @@ const Contact = () => {
 
       {/* Note: max-w-5xl keeps them nicely centered without stretching too far horizontally */}
       <div className="max-w-5xl mx-auto w-full relative z-10">
-        
+
         {/* --- HEADER --- */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -36,9 +36,9 @@ const Contact = () => {
 
         {/* --- 2 COLUMN GRID --- */}
         <div className="grid md:grid-cols-2 gap-8 md:gap-10">
-          
+
           {/* --- LEFT SIDE: COLLABORATION CARD (Dark) --- */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -50 }} // Slides in from the left
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -51,7 +51,7 @@ const Contact = () => {
             <p className="text-gray-400 mb-8 leading-relaxed">
               Feel free to reach out for collaborations or just a friendly hello. I'm always open to discussing new projects and creative ideas.
             </p>
-            
+
             <a href="mailto:sajulga.jessel123@gmail.com" className="inline-flex items-center gap-3 text-cyan-400 font-bold hover:text-cyan-300 transition-colors text-lg">
               <Mail size={24} />
               sajulga.jessel123@gmail.com
@@ -59,46 +59,46 @@ const Contact = () => {
           </motion.div>
 
           {/* --- RIGHT SIDE: SOCIAL MEDIA CARD (Colorful) --- */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 50 }} // Slides in from the right
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
             viewport={{ once: false }}
             className="bg-gradient-to-br from-cyan-600 via-blue-600 to-purple-600 p-8 md:p-10 rounded-3xl shadow-2xl relative overflow-hidden group flex flex-col justify-center h-full"
           >
-             {/* Shine Effect */}
+            {/* Shine Effect */}
             <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            
+
             <h3 className="text-2xl font-bold text-white mb-8 relative z-10">
               Connect on Social Media
             </h3>
 
             <div className="grid grid-cols-2 gap-4 relative z-10">
-              <SocialBtn 
-                icon={<Github size={24} />} 
-                name="Github" 
+              <SocialBtn
+                icon={<Github size={24} />}
+                name="Github"
                 handle="@jesselsajulga"
                 href="https://github.com/jesselsajulga"
               />
-              
-              <SocialBtn 
-                icon={<MessageCircle size={24} />} 
-                name="Messenger" 
-                handle="@itsmejesselsajulga" 
+
+              <SocialBtn
+                icon={<MessageCircle size={24} />}
+                name="Messenger"
+                handle="@itsmejesselsajulga"
                 href="https://www.facebook.com/itsmejesselsajulga"
               />
 
-              <SocialBtn 
-                icon={<Linkedin size={24} />} 
-                name="LinkedIn" 
-                handle="Jessel Rome" 
+              <SocialBtn
+                icon={<Linkedin size={24} />}
+                name="LinkedIn"
+                handle="Jessel Rome"
                 href="https://www.linkedin.com/in/jessel-rome-b-sajulga-b22b843a4/"
               />
-              
-              <SocialBtn 
-                icon={<Instagram size={24} />} 
-                name="Instagram" 
-                handle="@_jcieee1" 
+
+              <SocialBtn
+                icon={<Instagram size={24} />}
+                name="Instagram"
+                handle="@_jcieee1"
                 href="https://www.instagram.com/_jcieee1/"
               />
             </div>
@@ -113,7 +113,7 @@ const Contact = () => {
 // --- HELPER COMPONENT FOR SOCIAL BUTTONS ---
 const SocialBtn = ({ icon, name, handle, href }) => {
   return (
-    <a 
+    <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"

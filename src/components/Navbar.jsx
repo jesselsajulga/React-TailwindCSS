@@ -6,7 +6,7 @@ import shrekStatic from '../assets/shrek.webp';
 import faceMotion from '../assets/face.webm';
 import faceStatic from '../assets/face.webp';
 import frogMotion from '../assets/frog.webm';
-import frogStatic from '../assets/frog.png';
+import frogStatic from '../assets/frog.webp';
 import throttle from 'lodash/throttle';
 
 

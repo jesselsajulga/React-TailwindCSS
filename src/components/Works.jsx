@@ -21,6 +21,7 @@ import project16 from '../assets/project16.webp';
 import project17 from '../assets/project17.webp';
 import project18 from '../assets/project18.webp';
 import project19 from '../assets/project19.webp';
+import project20 from '../assets/competetion.webp';
 
 const Works = () => {
   // --- STRUCTURED TREE DATA ---
@@ -34,7 +35,8 @@ const Works = () => {
         { id: "hw-2", title: "Anti-Theft Mechanism", status: "Completed", statusColor: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20", desc: "Using Logic Gates and Flip-Flops to create a security system.", image: project2, tech: ["Hardware", "Memory"] },
         { id: "hw-3", title: "Christmas Light Controller", status: "Completed", statusColor: "text-yellow-400 bg-yellow-500/10 border-yellow-500/20", desc: "With the use of 555 Timer IC, designed a circuit that controls the blinking of Christmas lights.", image: project3, tech: ["Prototyping", "555 Timer IC"] },
         { id: "hw-4", title: "Alarm System", status: "Completed", statusColor: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20", desc: "A finite state machine implementation for managing alarm system.", image: project4, tech: ["State Machines"] },
-        { id: "hw-5", title: "HDL", status: "Completed", statusColor: "text-yellow-400 bg-yellow-500/10 border-yellow-500/20", desc: "Undergone a lesson about HDL and Verilog and implemented projects connecting with HDL lessons.", image: project11, tech: ["HDL", "Verilog"] }
+        { id: "hw-5", title: "HDL", status: "Completed", statusColor: "text-yellow-400 bg-yellow-500/10 border-yellow-500/20", desc: "Undergone a lesson about HDL and Verilog and implemented projects connecting with HDL lessons.", image: project11, tech: ["HDL", "Verilog"] },
+        { id: "hw-6", title: "Breadboard Competition Champion", status: "Completed", statusColor: "text-yellow-400 bg-yellow-500/10 border-yellow-500/20", desc: "Competed in a breadboard competition and won, applying skills in IC and logic gates.", image: project20, tech: ["IC", "Logic Gates", "Prototyping", "Problem Solving"] }
       ]
     },
     {

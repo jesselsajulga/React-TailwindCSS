@@ -4,7 +4,7 @@ import { Github, Linkedin, Instagram, MessageCircle, Bot, Cpu } from 'lucide-rea
 import confetti from 'canvas-confetti';
 
 import profileImg from '../assets/profile.webp';
-import hoverImg from '../assets/mog.webp';
+import hoverImg from '../assets/profilemog.webp';
 
 const Hero = () => {
 
